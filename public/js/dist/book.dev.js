@@ -12,8 +12,6 @@ function onSave(f) {
 
 function onRemove(id) {
   if (confirm('정말 삭제하시겠습니까?')) {
-    location.herf = '/city/remove/' + id;
+    location.href = '/book/remove/' + id;
   }
 }
-
-document.getElementById('date').valueAsDate = new Date();

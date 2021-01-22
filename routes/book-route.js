@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   const sql = 'SELECT * FROM books ORDER BY id ASC';
   const onQuery = (err, r) => {
     for(let v of r) {
-      v.wdate = moment().format('YYYY-MM-DD hh:mm');
+      v.wdate = moment(v.wdate).format('YYYY-MM-DD hh:mm:ss');  /* !!!! */
     }
     res.render('book/list', {file: 'book', data: r})
   }
@@ -23,9 +23,10 @@ router.get('/create', (req, res) => {
 //도서 등록(저장)
 router.post('/save', (req, res) => {
   const { name, writer, wdate } = req.body;
-  const sql = 'INSERT INTO books SET name=?, writer=? wdate=?';
-  const value = [name, writer, wdate];
+  const sql = 'INSERT INTO books SET name=?, writer=?, wdate=?';
+  const value = [name, writer, new Date()];
   const onQuery = (err, r) => {
+    console.log(err);
     res.redirect('/book');
   }
   connection.query(sql, value, onQuery);

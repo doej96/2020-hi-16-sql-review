@@ -21,7 +21,8 @@ router.get('/', function (req, res) {
     try {
       for (var _iterator = r[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var v = _step.value;
-        v.wdate = moment().format('YYYY-MM-DD hh:mm');
+        v.wdate = moment(v.wdate).format('YYYY-MM-DD hh:mm:ss');
+        /* !!!! */
       }
     } catch (err) {
       _didIteratorError = true;
@@ -58,10 +59,11 @@ router.post('/save', function (req, res) {
       name = _req$body.name,
       writer = _req$body.writer,
       wdate = _req$body.wdate;
-  var sql = 'INSERT INTO books SET name=?, writer=? wdate=?';
-  var value = [name, writer, wdate];
+  var sql = 'INSERT INTO books SET name=?, writer=?, wdate=?';
+  var value = [name, writer, new Date()];
 
   var onQuery = function onQuery(err, r) {
+    console.log(err);
     res.redirect('/book');
   };
 
