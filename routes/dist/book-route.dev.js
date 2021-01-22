@@ -5,7 +5,9 @@ var express = require('express');
 var router = express.Router();
 
 var _require = require('../modules/mysql-conn'),
-    connection = _require.connection; //도서 리스트
+    connection = _require.connection;
+
+var moment = require('moment'); //도서 리스트
 
 
 router.get('/', function (req, res) {
@@ -43,4 +45,11 @@ router.get('/', function (req, res) {
   };
 
   connection.query(sql, onQuery);
+}); //도서 등록
+
+router.get('/create', function (req, res) {
+  res.render('city/create', {
+    file: 'book'
+  });
 });
+module.exports = router;
