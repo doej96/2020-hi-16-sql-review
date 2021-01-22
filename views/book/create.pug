@@ -2,9 +2,9 @@ extends ../layout/default.pug
 
 block content
   .wrapper
-    h2.title 도시등록
-      .wr-wrapper.border.rounded.p-4
-        form(action="/city/save" method="get" onsubmit="return onSave(this);")
+    h2.title 도서 등록
+      .wr-wrapper.border.rounded.p-4.mt-5
+        form(action="/book/save" method="get" onsubmit="return onSave(this);")
           table.table
             tbody
               tr
@@ -18,7 +18,7 @@ block content
               tr
                 td 등록일
                 td.form-inline
-                  input.form-control(type="date" name="wdate")
+                  input.form-control(type="date" id="date" name="wdate" value="" readonly)
           .text-center
           button.btn.btn-primary 도서 등록
           button.btn.btn-danger(type="reset") 다시작성

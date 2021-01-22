@@ -1,0 +1,24 @@
+extends ../layout/default.pug
+
+block content
+  .wrapper
+    h2.title 도서 등록
+      .wr-wrapper.border.rounded.p-4.mt-5
+        form(action="/book/save" method="get" onsubmit="return onSave(this);")
+          table.table
+            tbody
+              tr
+                td 책 제목
+                td.form-inline
+                  input.form-control(type="text" name="name" placeholder="책 제목")
+              tr
+                td 저자
+                td.form-inline
+                  input.form-control(type="text" name="writer" placeholder="저자")
+              tr
+                td 등록일
+                td.form-inline
+                  input.form-control(type="date" name="wdate")
+          .text-center
+          button.btn.btn-primary 도서 수정
+          button.btn.btn-danger(type="reset") 다시작성

@@ -7,8 +7,8 @@ const bookRouter = require('./routes/book-route')
 
 app.listen(3001, () => {console.log('http://127.0.0.1:3001')});
 
-app.set('veiw engine','pug');
-app.set('veiws', path.join(__dirname, 'views'));
+app.set('view engine','pug');
+app.set('views', path.join(__dirname, 'views'));
 app.locals.pretty = true;
 
 app.use(express.json());

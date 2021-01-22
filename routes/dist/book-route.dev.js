@@ -11,7 +11,7 @@ var moment = require('moment'); //도서 리스트
 
 
 router.get('/', function (req, res) {
-  var sql = 'SELECT * FROM city ORDER BY id ASC';
+  var sql = 'SELECT * FROM books ORDER BY id ASC';
 
   var onQuery = function onQuery(err, r) {
     var _iteratorNormalCompletion = true;
@@ -48,8 +48,33 @@ router.get('/', function (req, res) {
 }); //도서 등록
 
 router.get('/create', function (req, res) {
-  res.render('city/create', {
+  res.render('book/create', {
     file: 'book'
   });
+}); //도서 등록(저장)
+
+router.post('/save', function (req, res) {
+  var _req$body = req.body,
+      name = _req$body.name,
+      writer = _req$body.writer,
+      wdate = _req$body.wdate;
+  var sql = 'INSERT INTO books SET name=?, writer=? wdate=?';
+  var value = [name, writer, wdate];
+
+  var onQuery = function onQuery(err, r) {
+    res.redirect('/book');
+  };
+
+  connection.query(sql, value, onQuery);
+}); //도서 삭제
+
+router.get('/remove/:id', function (req, res) {
+  var sql = 'DELETE FROM books WHERE id=' + req.params.id;
+
+  var onQuery = function onQuery(err, r) {
+    res.redirect('/book');
+  };
+
+  connection.query(sql, onQuery);
 });
 module.exports = router;

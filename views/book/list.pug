@@ -20,7 +20,7 @@ block content
               td= v.writer
               td= v.wdate
               td
-                a(href="/book/remove").mr-2
+                a(href=`javascript:onRemove(${v.id})`).mr-2
                   i.fa.fa-trash-alt
                 a(href="/book/update")
                   i.fa.fa-edit
