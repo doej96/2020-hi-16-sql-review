@@ -1,0 +1,26 @@
+extends ../layout/default.pug
+
+block content
+  .wrapper
+    h2.title 도서 리스트
+    a(href="/book/create").btn.btn-primary.text-light.mb-2 도서등록
+    table.city-wrap.table.table-striped.text-center
+      thead.thead-light
+        tr
+          th 번호
+          th 책 제목
+          th 저자
+          th 등록일
+          th 관리
+        tbody
+          each v in data
+            tr
+              td= v.id
+              td= v.name
+              td= v.writer
+              td= v.wdate
+              td
+                a(href="/book/remove").mr-2
+                  i.fa.fa-trash-alt
+                a(href="/book/update")
+                  i.fa.fa-edit
