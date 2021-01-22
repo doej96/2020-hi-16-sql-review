@@ -61,6 +61,7 @@ router.post('/save', function (req, res) {
       wdate = _req$body.wdate;
   var sql = 'INSERT INTO books SET name=?, writer=?, wdate=?';
   var value = [name, writer, new Date()];
+  /* !!! */
 
   var onQuery = function onQuery(err, r) {
     console.log(err);
@@ -78,5 +79,35 @@ router.get('/remove/:id', function (req, res) {
   };
 
   connection.query(sql, onQuery);
+}); // 도시 수정
+// -수정하는 페이지
+
+router.get('/update/:id', function (req, res) {
+  var sql = 'SELECT * FROM books WHERE id=' + req.params.id;
+
+  var onQuery = function onQuery(err, r) {
+    res.render('book/update', {
+      file: 'book',
+      r: r[0]
+    });
+  };
+
+  connection.query(sql, onQuery);
+}); // -수정하고 저장
+
+router.post('/update', function (req, res) {
+  var _req$body2 = req.body,
+      name = _req$body2.name,
+      writer = _req$body2.writer,
+      wdate = _req$body2.wdate,
+      id = _req$body2.id;
+  var sql = 'UPDATE books SET name=?, writer=?, wdate=? WHERE id=?';
+  var value = [name, writer, new Date(), id];
+
+  var onQuery = function onQuery(err, r) {
+    res.redirect('/book');
+  };
+
+  connection.query(sql, value, onQuery);
 });
 module.exports = router;
